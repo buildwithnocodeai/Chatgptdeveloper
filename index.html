@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Portfolio</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <button id="themeToggle">🌙</button>
+
+  <header>
+    <div class="container">
+      <h1>Saravanan</h1>
+      <p>Full Stack Developer</p>
+    </div>
+  </header>
+
+  <section id="about" class="container fade-in">
+    <h2>About Me</h2>
+    <p>I'm a passionate developer building modern websites and apps.</p>
+  </section>
+
+  <section id="projects" class="container fade-in">
+    <h2>Projects</h2>
+    <div class="projects-grid">
+      <div class="project-card">
+        <img src="https://via.placeholder.com/300" alt="Project 1"/>
+        <p>Project 1 Description</p>
+      </div>
+      <div class="project-card">
+        <img src="https://via.placeholder.com/300" alt="Project 2"/>
+        <p>Project 2 Description</p>
+      </div>
+      <div class="project-card">
+        <img src="https://via.placeholder.com/300" alt="Project 3"/>
+        <p>Project 3 Description</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="container fade-in">
+    <h2>Contact Me</h2>
+    <form
+      id="contactForm"
+      action="https://formspree.io/f/xyzpekvn"
+      method="POST"
+    >
+      <input type="text" name="name" placeholder="Your Name" required />
+      <input type="email" name="email" placeholder="Your Email" required />
+      <textarea name="message" placeholder="Your Message" required></textarea>
+      <button type="submit">Send</button>
+    </form>
+    <p id="formStatus"></p>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Saravanan. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
