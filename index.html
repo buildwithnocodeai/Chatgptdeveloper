@@ -8,8 +8,10 @@
 </head>
 <body>
 
-  <button id="themeToggle">🌙</button>
+  <!-- 🌗 Dark Mode Toggle -->
+  <button id="themeToggle" aria-label="Toggle Dark Mode">🌙</button>
 
+  <!-- Header -->
   <header>
     <div class="container">
       <h1>Saravanan</h1>
@@ -17,11 +19,13 @@
     </div>
   </header>
 
+  <!-- About -->
   <section id="about" class="container fade-in">
     <h2>About Me</h2>
     <p>I'm a passionate developer building modern websites and apps.</p>
   </section>
 
+  <!-- Projects -->
   <section id="projects" class="container fade-in">
     <h2>Projects</h2>
     <div class="projects-grid">
@@ -38,8 +42,17 @@
         <p>Project 3 Description</p>
       </div>
     </div>
+
+    <!-- API Profile Display -->
+    <div id="profile">
+      <p><strong>Name:</strong> <span id="name"></span></p>
+      <p><strong>Email:</strong> <span id="email"></span></p>
+      <p><strong>Skills:</strong></p>
+      <ul id="skills"></ul>
+    </div>
   </section>
 
+  <!-- Contact Form -->
   <section id="contact" class="container fade-in">
     <h2>Contact Me</h2>
     <form
@@ -55,10 +68,12 @@
     <p id="formStatus"></p>
   </section>
 
+  <!-- Footer -->
   <footer>
     <p>&copy; 2025 Saravanan. All rights reserved.</p>
   </footer>
 
+  <!-- JS -->
   <script src="script.js"></script>
 </body>
 </html>
