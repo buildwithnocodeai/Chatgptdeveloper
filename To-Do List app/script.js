@@ -47,3 +47,22 @@ function renderTasks() {
 function toggleComplete(index) {
   const tasks = getTasksFromStorage();
   tasks[index].completed = !tasks[index].completed;
+  saveTasksToStorage(tasks); // Save the updated tasks
+  renderTasks(); // Re-render the task list
+}
+
+function deleteTask(index) {
+  const tasks = getTasksFromStorage();
+  tasks.splice(index, 1);
+  saveTasksToStorage(tasks);
+  renderTasks();
+}
+
+function getTasksFromStorage() {
+  const tasksJson = localStorage.getItem("tasks");
+  return tasksJson ? JSON.parse(tasksJson) : [];
+}
+
+function saveTasksToStorage(tasks) {
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+}
