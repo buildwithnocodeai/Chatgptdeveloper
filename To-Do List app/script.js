@@ -46,7 +46,8 @@ function renderTasks() {
     li.innerHTML = `
       <div>
         <strong>${task.text}</strong><br>
-        <small>📅 ${task.dueDate || "No due date"} | 🗂️ ${task.category}</small>
+      <small>📅 ${task.dueDate || "No due date"} | 📁 ${task.category || "General"}</small>
+
       </div>
       <div>
         <button onclick="toggleComplete(${index})">✅</button>
