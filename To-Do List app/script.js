@@ -1,44 +1,61 @@
-// Load tasks when the page loads
 window.onload = function () {
-  loadTasks();
+  renderTasks();
 };
 
 function addTask() {
-  const taskInput = document.getElementById("taskInput");
-  const taskText = taskInput.value.trim();
+  const text = document.getElementById("taskInput").value.trim();
+  const dueDate = document.getElementById("dueDateInput").value;
+  const category = document.getElementById("categoryInput").value;
 
-  if (taskText === "") {
+  if (text === "") {
     alert("Please enter a task.");
     return;
   }
 
   const task = {
-    text: taskText,
-    completed: false,
+    text,
+    dueDate,
+    category,
+    completed: false
   };
 
   const tasks = getTasksFromStorage();
   tasks.push(task);
   saveTasksToStorage(tasks);
-
   renderTasks();
-  taskInput.value = "";
+
+  document.getElementById("taskInput").value = "";
+  document.getElementById("dueDateInput").value = "";
 }
 
 function renderTasks() {
   const taskList = document.getElementById("taskList");
   taskList.innerHTML = "";
 
+  const filterCategory = document.getElementById("filterCategory").value;
   const tasks = getTasksFromStorage();
 
   tasks.forEach((task, index) => {
+    if (filterCategory !== "All" && task.category !== filterCategory) return;
+
     const li = document.createElement("li");
     if (task.completed) li.classList.add("completed");
 
     li.innerHTML = `
-      <span onclick="toggleComplete(${index})">${task.text}</span>
-      <button class="delete-btn" onclick="deleteTask(${index})">Delete</button>
+      <div>
+        <strong>${task.text}</strong><br>
+        <small>📅 ${task.dueDate || "No due date"} | 🗂️ ${task.category}</small>
+      </div>
+      <div>
+        <button onclick="toggleComplete(${index})">✅</button>
+        <button onclick="editTask(${index})">✏️</button>
+        <button class="delete-btn" onclick="deleteTask(${index})">🗑️</button>
+      </div>
     `;
+
+    li.style.display = "flex";
+    li.style.justifyContent = "space-between";
+    li.style.alignItems = "center";
 
     taskList.appendChild(li);
   });
@@ -47,8 +64,8 @@ function renderTasks() {
 function toggleComplete(index) {
   const tasks = getTasksFromStorage();
   tasks[index].completed = !tasks[index].completed;
-  saveTasksToStorage(tasks); // Save the updated tasks
-  renderTasks(); // Re-render the task list
+  saveTasksToStorage(tasks);
+  renderTasks();
 }
 
 function deleteTask(index) {
@@ -58,9 +75,20 @@ function deleteTask(index) {
   renderTasks();
 }
 
+function editTask(index) {
+  const tasks = getTasksFromStorage();
+  const current = tasks[index];
+
+  const newText = prompt("Edit task:", current.text);
+  if (newText !== null && newText.trim() !== "") {
+    current.text = newText.trim();
+    saveTasksToStorage(tasks);
+    renderTasks();
+  }
+}
+
 function getTasksFromStorage() {
-  const tasksJson = localStorage.getItem("tasks");
-  return tasksJson ? JSON.parse(tasksJson) : [];
+  return JSON.parse(localStorage.getItem("tasks")) || [];
 }
 
 function saveTasksToStorage(tasks) {

@@ -11,7 +11,24 @@
     <h1>📝 To-Do List</h1>
     <div class="input-section">
       <input type="text" id="taskInput" placeholder="Enter a new task" />
+      <input type="date" id="dueDateInput" />
+      <select id="categoryInput">
+        <option value="General">General</option>
+        <option value="Work">Work</option>
+        <option value="Personal">Personal</option>
+        <option value="Urgent">Urgent</option>
+      </select>
       <button onclick="addTask()">Add</button>
+    </div>
+    <div class="filters">
+      <label>Filter:
+        <select id="filterCategory" onchange="renderTasks()">
+          <option value="All">All</option>
+          <option value="Work">Work</option>
+          <option value="Personal">Personal</option>
+          <option value="Urgent">Urgent</option>
+        </select>
+      </label>
     </div>
     <ul id="taskList"></ul>
   </div>
