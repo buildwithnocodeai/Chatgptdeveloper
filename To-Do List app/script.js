@@ -5,7 +5,9 @@ window.onload = function () {
 function addTask() {
   const text = document.getElementById("taskInput").value.trim();
   const dueDate = document.getElementById("dueDateInput").value;
-  const category = document.getElementById("categoryInput").value;
+  const categorySelect = document.getElementById("categoryInput");
+const category = categorySelect.options[categorySelect.selectedIndex].value;
+
 
   if (text === "") {
     alert("Please enter a task.");
