@@ -1,5 +1,5 @@
 body {
-  background: #f9f4fa;
+  background-color: #add8e6; /* light blue */
   font-family: Arial;
 }
 
@@ -32,25 +32,26 @@ ol {
 }
 
 .profile-card {
-  background: none;
-  box-shadow: none;
-  max-width: 200px;
-  margin: 40px auto 0 auto;
-  padding: 0;
-  border-radius: 0;
+  background: #fff;
+  max-width: 400px;
+  margin: 40px auto 20px auto;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+  padding: 32px 24px 24px 24px;
   text-align: center;
 }
 .profile-img {
-  width: 100px;
-  height: 100px;
+  width: 140px;
+  height: 140px;
   border-radius: 50%;
   object-fit: cover;
-  border: none;
-  background: #ede7f6;
+  border: 5px solid #90caf9;
+  margin-bottom: 18px;
+  background: #e0f7fa;
   display: block;
   margin-left: auto;
   margin-right: auto;
-  box-shadow: none;
+  box-shadow: 0 2px 8px rgba(33,150,243,0.10);
 }
 .profile-name {
   font-size: 2rem;
