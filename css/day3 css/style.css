@@ -30,3 +30,46 @@ ol {
   display: table;
   margin: 0 auto 20px auto; /* center horizontally and add space below */
 }
+
+.profile-card {
+  background: #fff;
+  max-width: 400px;
+  margin: 40px auto 20px auto;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+  padding: 32px 24px 24px 24px;
+  text-align: center;
+}
+.profile-img {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #add8e6;
+  margin-bottom: 18px;
+  background: #e0f7fa;
+}
+.profile-name {
+  font-size: 2rem;
+  color: darkblue;
+  margin-bottom: 6px;
+  font-weight: bold;
+}
+.profile-desc {
+  color: #333;
+  margin-bottom: 18px;
+  font-size: 1.1rem;
+}
+.profile-section {
+  margin-top: 28px;
+  margin-bottom: 10px;
+  color: #1976d2;
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-align: left;
+}
+@media (max-width: 500px) {
+  .profile-card {
+    padding: 18px 6px;
+  }
+}
