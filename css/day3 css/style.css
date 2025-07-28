@@ -10,8 +10,23 @@ h4,
 h5,
 h6 {
   color: darkblue;
+  text-align: center; /* Center all headings */
 }
 
 p {
   color: #333;
+}
+
+li {
+  background-color: #e0f7fa; /* light cyan */
+  border-radius: 10px;
+  padding: 8px 16px;
+  margin-bottom: 6px;
+  list-style-position: inside;
+}
+
+ul,
+ol {
+  display: table;
+  margin: 0 auto 20px auto; /* center horizontally and add space below */
 }
