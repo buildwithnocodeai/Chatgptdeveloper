@@ -48,6 +48,9 @@ ol {
   border: 4px solid #add8e6;
   margin-bottom: 18px;
   background: #e0f7fa;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 .profile-name {
   font-size: 2rem;
