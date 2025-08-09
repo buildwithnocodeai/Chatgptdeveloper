@@ -46,4 +46,35 @@ document.addEventListener('DOMContentLoaded', function() {
             this.style.transform = 'scale(1)';
         });
     });
+
+    // Theme toggle functionality
+    const themeToggle = document.getElementById('theme-toggle');
+    const htmlElement = document.documentElement;
+    
+    // Check for saved theme preference or respect OS setting
+    const savedTheme = localStorage.getItem('theme');
+    const osDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    // Apply saved theme or OS preference
+    if (savedTheme) {
+        htmlElement.setAttribute('data-theme', savedTheme);
+        themeToggle.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+    } else if (osDarkMode) {
+        htmlElement.setAttribute('data-theme', 'dark');
+        themeToggle.textContent = '☀️';
+    } else {
+        themeToggle.textContent = '🌙';
+    }
+    
+    // Toggle theme when button is clicked
+    themeToggle.addEventListener('click', function() {
+        const currentTheme = htmlElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        
+        htmlElement.setAttribute('data-theme', newTheme);
+        themeToggle.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+        
+        // Save preference to localStorage
+        localStorage.setItem('theme', newTheme);
+    });
 });
