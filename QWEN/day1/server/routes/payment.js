@@ -1,11 +1,18 @@
 // server/routes/payment.js
 const express = require('express');
 const router = express.Router();
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY || 'sk_test_placeholder');
+const Razorpay = require('razorpay');
+const crypto = require('crypto');
 
-// Create a payment intent
-router.post('/create-payment-intent', async (req, res) => {
-    const { amount, currency } = req.body;
+// Initialize Razorpay with your key and secret
+const razorpay = new Razorpay({
+  key_id: process.env.RAZORPAY_KEY_ID || 'rzp_test_placeholder',
+  key_secret: process.env.RAZORPAY_KEY_SECRET || 'placeholder_secret'
+});
+
+// Create a payment order
+router.post('/create-order', async (req, res) => {
+    const { amount, currency, receipt } = req.body;
     
     // Basic validation
     if (!amount || !currency) {
@@ -13,55 +20,45 @@ router.post('/create-payment-intent', async (req, res) => {
     }
     
     try {
-        // Create a PaymentIntent with the order amount and currency
-        const paymentIntent = await stripe.paymentIntents.create({
-            amount: amount * 100, // Stripe expects amounts in cents
+        // Create a Razorpay order
+        const options = {
+            amount: amount * 100, // Razorpay expects amounts in paise (smallest currency unit)
             currency: currency,
-            automatic_payment_methods: {
-                enabled: true,
-            },
-        });
+            receipt: receipt || 'rcptid_' + Date.now()
+        };
+        
+        const order = await razorpay.orders.create(options);
         
         res.json({
             success: true,
-            clientSecret: paymentIntent.client_secret
+            order
         });
     } catch (error) {
-        console.error('Error creating payment intent:', error);
-        res.status(500).json({ error: 'Failed to create payment intent' });
+        console.error('Error creating Razorpay order:', error);
+        res.status(500).json({ error: 'Failed to create payment order' });
     }
 });
 
-// Handle payment confirmation webhook (simplified)
-router.post('/webhook', express.raw({type: 'application/json'}), (req, res) => {
-    const sig = req.headers['stripe-signature'];
-    let event;
-
-    try {
-        event = stripe.webhooks.constructEvent(req.body, sig, process.env.STRIPE_WEBHOOK_SECRET || 'whsec_placeholder');
-    } catch (err) {
-        console.error('Webhook signature verification failed.', err.message);
-        return res.status(400).send(`Webhook Error: ${err.message}`);
+// Verify payment
+router.post('/verify-payment', (req, res) => {
+    const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = req.body;
+    
+    // Verify the payment signature
+    const hmac = crypto.createHmac('sha256', process.env.RAZORPAY_KEY_SECRET || 'placeholder_secret');
+    hmac.update(razorpay_order_id + '|' + razorpay_payment_id);
+    const generated_signature = hmac.digest('hex');
+    
+    if (generated_signature === razorpay_signature) {
+        res.json({
+            success: true,
+            message: 'Payment verified successfully'
+        });
+    } else {
+        res.status(400).json({
+            success: false,
+            message: 'Invalid signature sent!'
+        });
     }
-
-    // Handle the event
-    switch (event.type) {
-        case 'payment_intent.succeeded':
-            const paymentIntentSucceeded = event.data.object;
-            console.log('Payment succeeded:', paymentIntentSucceeded.id);
-            // Then define and call a function to handle the event payment_intent.succeeded
-            break;
-        case 'payment_intent.payment_failed':
-            const paymentIntentFailed = event.data.object;
-            console.log('Payment failed:', paymentIntentFailed.id);
-            // Then define and call a function to handle the event payment_intent.payment_failed
-            break;
-        default:
-            console.log(`Unhandled event type ${event.type}`);
-    }
-
-    // Return a 200 response to acknowledge receipt of the event
-    res.send();
 });
 
 module.exports = router;

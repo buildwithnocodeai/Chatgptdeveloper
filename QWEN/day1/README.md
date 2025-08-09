@@ -25,7 +25,7 @@ This is a stunning service-based website with a modern design inspired by Apple'
 - **Modern Design**: Clean, minimalist design with ample white space and responsive layout.
 - **User Authentication**: Sign up and log in functionality with JWT tokens.
 - **Contact Forms**: Integrated contact forms with server-side handling.
-- **Payment Integration**: Stripe payment gateway integration for processing payments.
+- **Payment Integration**: Razorpay payment gateway integration for processing payments (popular in India and other regions).
 - **Responsive**: Fully responsive design that works on all device sizes.
 
 ## Getting Started
@@ -44,7 +44,7 @@ This is a stunning service-based website with a modern design inspired by Apple'
 - **Backend**: Node.js, Express.js
 - **Database**: MongoDB (with Mongoose)
 - **Authentication**: bcrypt, jsonwebtoken
-- **Payments**: Stripe
+- **Payments**: Razorpay
 
 ## Company Identity
 
@@ -66,7 +66,7 @@ To fully deploy and monetize this website, you would need to:
 1. Deploy the frontend to a hosting service (e.g., Netlify, Vercel).
 2. Deploy the backend to a cloud platform (e.g., Heroku, AWS, Google Cloud).
 3. Set up a MongoDB database (e.g., MongoDB Atlas).
-4. Configure your Stripe account and update the API keys in `.env`.
+4. Configure your Razorpay account and update the API keys in `.env`.
 5. Set up a domain name and SSL certificate.
 6. Implement analytics (e.g., Google Analytics).
 7. Add more content and services based on your business model.
