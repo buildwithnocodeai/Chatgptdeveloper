@@ -1,0 +1,39 @@
+{
+    "name": "My Custom Palace",
+    "areas": [
+        {
+            "name": "Living Room",
+            "items": [
+                "Buy groceries",
+                "Finish report",
+                "Call mom",
+                "Read book",
+                "Exercise",
+                "Water plants",
+                "Pay bills",
+                "Write email"
+            ],
+            "max_items": 10
+        },
+        {
+            "name": "Bedroom",
+            "items": [],
+            "max_items": 10
+        },
+        {
+            "name": "Kitchen",
+            "items": [],
+            "max_items": 10
+        },
+        {
+            "name": "Bathroom",
+            "items": [],
+            "max_items": 10
+        },
+        {
+            "name": "Study",
+            "items": [],
+            "max_items": 10
+        }
+    ]
+}
