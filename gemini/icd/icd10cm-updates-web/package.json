@@ -1,0 +1,31 @@
+{
+  "name": "icd10cm-updates-web",
+  "version": "1.0.0",
+  "description": "A web application to check the latest updates for ICD-10-CM.",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-scripts": "4.0.3",
+    "axios": "^0.21.1"
+  },
+  "devDependencies": {
+    "typescript": "^4.1.2",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0"
+  },
+  "keywords": [
+    "ICD-10-CM",
+    "updates",
+    "healthcare",
+    "web"
+  ],
+  "author": "Your Name",
+  "license": "MIT"
+}
