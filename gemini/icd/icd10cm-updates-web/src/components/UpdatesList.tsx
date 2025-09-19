@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { fetchUpdates } from '../services/api';
 import { Update } from '../types';
+import './UpdatesList.css';
 
 const UpdatesList: React.FC = () => {
     const [updates, setUpdates] = useState<Update[]>([]);
@@ -31,14 +32,24 @@ const UpdatesList: React.FC = () => {
     }
 
     return (
-        <ul>
-            {updates.map((update) => (
-                <li key={update.id}>
-                    <h3>{update.title}</h3>
-                    <p>{update.description}</p>
-                </li>
-            ))}
-        </ul>
+        <table className="updates-table">
+            <thead>
+                <tr>
+                    <th>Code</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                {updates.map((update) => (
+                    <tr key={update.id}>
+                        <td>{update.id}</td>
+                        <td>{update.title}</td>
+                        <td>{update.description}</td>
+                    </tr>
+                ))}
+            </tbody>
+        </table>
     );
 };
 
